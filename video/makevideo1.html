@@ -1,0 +1,153 @@
+<html>
+    <body>
+        <head>
+            <button onclick="goBack()">Go Back</button>
+        <h1><b>MAKE YOUR VIDEO</b></h1>
+        
+        </head>
+<style>
+   body {background-color: greenyellow;}
+h1,p{text-align: center;}
+
+video {
+  margin-top: 4px;
+  border: 1px solid black;
+}
+
+.button {
+  cursor: pointer;
+  display: block;
+  width: 160px;
+  border: 1px solid black;
+  font-size: 16px;
+  text-align: center;
+  padding-top: 2px;
+  padding-bottom: 4px;
+  color: black;
+  background-color: red;
+  
+}
+
+h2 {
+  margin-bottom: 4px;
+}
+
+.left {
+  margin-right: 10px;
+  float: left;
+  width: 160px;
+  padding: 0px;
+}
+
+.right {
+  margin-left: 10px;
+  float: left;
+  width: 160px;
+  padding: 0px;
+}
+
+.bottom {
+  clear: both;
+  padding-top: 10px;
+}
+        
+        
+        
+        
+        </style>
+
+
+<div class="left">
+  <div id="startButton" class="button">
+    RECORD
+  </div>
+  <h2>Your Video</h2>
+  <video id="preview" width="160" height="120" autoplay muted></video>
+</div>
+<div class="right">
+  <div id="stopButton" class="button">
+    Stop REC
+  </div>
+  <h2>Review your record</h2>
+  <video id="recording" width="160" height="120" controls></video>
+  
+   
+
+</div>
+<div class="bottom">
+  <pre id="log"></pre>
+</div>
+<script>
+let preview = document.getElementById("preview");
+let recording = document.getElementById("recording");
+let startButton = document.getElementById("startButton");
+let stopButton = document.getElementById("stopButton");
+
+
+
+let recordingTimeMS = 5000;
+
+function wait(delayInMS) {
+  return new Promise(resolve => setTimeout(resolve, delayInMS));
+}
+function startRecording(stream, lengthInMS) {
+  let recorder = new MediaRecorder(stream);
+  let data = [];
+ 
+  recorder.ondataavailable = event => data.push(event.data);
+  recorder.start();
+  
+ 
+  let stopped = new Promise((resolve, reject) => {
+    recorder.onstop = resolve;
+    recorder.onerror = event => reject(event.name);
+  });
+
+  let recorded = wait(lengthInMS).then(
+    () => recorder.state == "recording" && recorder.stop()
+  );
+ 
+  return Promise.all([
+    stopped,
+    recorded
+  ])
+  .then(() => data);
+}
+function stop(stream) {
+  stream.getTracks().forEach(track => track.stop());
+}
+startButton.addEventListener("click", function() {
+  navigator.mediaDevices.getUserMedia({
+    video: true,
+    audio: true
+  }).then(stream => {
+    preview.srcObject = stream;
+    
+    preview.captureStream = preview.captureStream || preview.mozCaptureStream;
+    return new Promise(resolve => preview.onplaying = resolve);
+  }).then(() => startRecording(preview.captureStream(), recordingTimeMS))
+  .then (recordedChunks => {
+    let recordedBlob = new Blob(recordedChunks, { type: "video/webm" });
+    recording.src = URL.createObjectURL(recordedBlob);
+   
+   
+    
+    
+  })
+  .catch(log);
+}, false);stopButton.addEventListener("click", function() {
+  stop(preview.srcObject);
+}, false);
+
+
+function goBack() {
+  window.history.back();
+} 
+</script>
+        
+        <footer>
+        <p> To play recording, press the play button</p>
+        </footer>
+        
+    </body>
+</html>
