@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <title>Recipe</title>
+        <h1> MAKE YOUR OWN RECIPE</h1>
+        <meta charset="windows-1252">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <style>
+            body{
+                background-image: url('images/img1.jpg');
+            }
+            
+            .container{overflow: hidden}
+            .tab{float: left; background-color: pink}
+            .tab-2{margin-left: 50px}
+            .tab-2 input{display: block;margin-bottom: 10px}
+            tr{transition:all .25s ease-in-out}
+            tr:hover{background-color:#EEE;cursor: pointer}
+            #table {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#table td, #table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#table tr:nth-child(even){background-color: #f2f2f2;}
+
+#table tr:hover {background-color: yellow;}
+
+#table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+            h1{text-align: center; 
+                color: yellow;}            
+        </style>
+        
+    </head>
+    <body>
+        <button onclick="goBack()">Go Back</button>
+        <div class="container">
+            <div class="tab tab-1">
+                <table id="table" border="1">
+                    <tr>
+                        <th>Step 1</th>
+                        <th>Step 2</th>
+                        <th>Step 3</th>
+                        <th>Required Ingredients</th>
+                    </tr>
+                    
+                </table>
+            </div>
+            <div class="tab tab-2">
+                Step 1 :<input type="text" name="s1" id="s1">
+                Step 2 :<input type="text" name="s2" id="s2">
+                Step 3 :<input type="text" name="s3" id="s3">
+                Required Ingredients :<input type="text" name="i1" id="i1">
+                <button onclick="addHtmlTableRow();">Add</button>
+                <button onclick="editHtmlTbleSelectedRow();">Edit</button>
+                <button onclick="removeSelectedRow();">Delete</button>
+                
+            </div>
+        </div>
+        
+        <script>
+  
+              function goBack() {
+  window.history.back();
+} 
+            
+            var rIndex,
+                table = document.getElementById("table");
+            
+            // check the empty input
+            function checkEmptyInput()
+            {
+                var isEmpty = false,
+                    s1 = document.getElementById("s1").value,
+                    s2 = document.getElementById("s2").value,
+                    s3 = document.getElementById("s3").value,
+                    i1 = document.getElementById("i1").value;
+            
+                if(s1 === ""){
+                    alert("Step 1 Cannot Be Empty");
+                    isEmpty = true;
+                }
+                else if(s2 === ""){
+                    alert("Step 2 Cannot Be Empty");
+                    isEmpty = true;
+                }
+                else if(s3 === ""){
+                    alert("Step 3 Cannot Be Empty");
+                    isEmpty = true;
+                }
+                else if(i1 === ""){
+                    alert("Ingredients Cannot Be Empty");
+                    isEmpty = true;
+                }
+                return isEmpty;
+            }
+            
+            // add Row
+            function addHtmlTableRow()
+            {
+                // get the table by id
+                // create a new row and cells
+                // get value from input text
+                // set the values into row cell's
+                if(!checkEmptyInput()){
+                var newRow = table.insertRow(table.length),
+                    cell1 = newRow.insertCell(0),
+                    cell2 = newRow.insertCell(1),
+                    cell3 = newRow.insertCell(2),
+                    cell4 = newRow.insertCell(3),
+                    s1 = document.getElementById("s1").value,
+                    s2 = document.getElementById("s2").value,
+                    s3 = document.getElementById("s3").value;
+                    i1 = document.getElementById("i1").value;
+            
+                cell1.innerHTML = s1;
+                cell2.innerHTML = s2;
+                cell3.innerHTML = s3;
+                cell4.innerHTML = i1;    
+                // call the function to set the event to the new row
+                selectedRowToInput();
+                    
+            }
+            }
+            
+            // display selected row data into input text
+            function selectedRowToInput()
+            {
+                
+                for(var i = 1; i < table.rows.length; i++)
+                {
+                    table.rows[i].onclick = function()
+                    {
+                      // get the seected row index
+                      rIndex = this.rowIndex;
+                      document.getElementById("s1").value = this.cells[0].innerHTML;
+                      document.getElementById("s2").value = this.cells[1].innerHTML;
+                      document.getElementById("s3").value = this.cells[2].innerHTML;
+                      document.getElementById("i1").value = this.cells[3].innerHTML;
+                    };
+                }
+            }
+            selectedRowToInput();
+            
+            function editHtmlTbleSelectedRow()
+            {
+                var s1 = document.getElementById("s1").value,
+                    s2 = document.getElementById("s2").value,
+                    s3 = document.getElementById("s3").value;
+                    i1 = document.getElementById("i1").value;
+               if(!checkEmptyInput()){
+                table.rows[rIndex].cells[0].innerHTML = s1;
+                table.rows[rIndex].cells[1].innerHTML = s2;
+                table.rows[rIndex].cells[2].innerHTML = s3;
+                table.rows[rIndex].cells[3].innerHTML = i1;   
+              }
+            }
+            
+            function removeSelectedRow()
+            {
+                table.deleteRow(rIndex);
+                // clear input text
+                document.getElementById("s1").value = "";
+                document.getElementById("s2").value = "";
+                document.getElementById("s3").value = "";
+                document.getElementById("i1").value = "";
+            }
+   
+        </script>
+        
+    </body>
+</html>
