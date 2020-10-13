@@ -73,6 +73,24 @@ table, th, td {
 })();
 
     </script>
+    <p>Relax with Music while reading recipes!</p>
+    <div>
+      <audio id="audio" src="http://www.sousound.com/music/healing/healing_02.mp3" preload="auto"  ></audio>
+      <button id="play">Play</button>
+      <button id="stop">Stop</button>
+    </div>
+    <script>
+      var playBtn = document.getElementById('play');
+var stopBtn = document.getElementById('stop');
+
+var playSound = function() {
+	audio.play();
+};
+
+playBtn.addEventListener('click', playSound, false);
+stopBtn.addEventListener('click', function(){audio.pause()}, false);
+
+    </script>
     <script src="/js/app.js"></script>
 </body>
 </html>
