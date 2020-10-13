@@ -24,6 +24,7 @@ table, th, td {
   margin-right: auto;
   height: 40%;
   width: 45%;
+ 
 }    
 </style>
 
@@ -57,7 +58,21 @@ table, th, td {
       <footer>
           <img src="images/pic2.jpg" alt="Paris" class="center">
     </footer>
-   
+    <p>Search your favourite recipe!</p>
+    <gcse:search enableAutoComplete="true"></gcse:search>
+    <script>
+      (function() {
+  var cx = '017643444788069204610:4gvhea_mvga'; // Insert your own Custom Search engine ID here
+  var gcse = document.createElement('script');
+  gcse.type = 'text/javascript';
+  gcse.async = true;
+  gcse.src = (document.location.protocol == 'https' ? 'https:' : 'http:') +
+    '//www.google.com/cse/cse.js?cx=' + cx;
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(gcse, s);
+})();
 
+    </script>
+    <script src="/js/app.js"></script>
 </body>
 </html>
