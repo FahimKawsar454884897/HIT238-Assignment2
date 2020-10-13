@@ -1,0 +1,36 @@
+
+            body{
+                background-image: url('images/img1.jpg');
+            }
+            
+            .container{overflow: hidden}
+            .tab{float: left; background-color: pink}
+            .tab-2{margin-left: 50px}
+            .tab-2 input{display: block;margin-bottom: 10px}
+            tr{transition:all .25s ease-in-out}
+            tr:hover{background-color:#EEE;cursor: pointer}
+            #table {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#table td, #table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#table tr:nth-child(even){background-color: #f2f2f2;}
+
+#table tr:hover {background-color: yellow;}
+
+#table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+            h1{text-align: center; 
+                color: yellow;}            
+       
