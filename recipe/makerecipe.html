@@ -8,7 +8,7 @@
 <title>Recipe</title>
    
 
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="style1.css">
      <link rel="manifest" href="/manifest.json">
 </head>
@@ -18,140 +18,193 @@
 
 
     <body>
-        <button onclick="goBack()">Go Back</button>
-        <div class="container">
-            <div class="tab tab-1">
-                <table id="table" border="1">
-                    <tr>
-                        <th>Step 1</th>
-                        <th>Step 2</th>
-                        <th>Step 3</th>
-                        <th>Required Ingredients</th>
-                    </tr>
-                    
-                </table>
-            </div>
-            <div class="tab tab-2">
-                Step 1 :<input type="text" name="s1" id="s1">
-                Step 2 :<input type="text" name="s2" id="s2">
-                Step 3 :<input type="text" name="s3" id="s3">
-                Required Ingredients :<input type="text" name="i1" id="i1">
-                <button onclick="addHtmlTableRow();">Add</button>
-                <button onclick="editHtmlTbleSelectedRow();">Edit</button>
-                <button onclick="removeSelectedRow();">Delete</button>
-                
-            </div>
-        </div>
+        <body>
+
+            <header>
+              <div class="navbar navbar-dark bg-dark box-shadow">
+                <div class="container d-flex justify-content-between">
+                  <a href="index.html" class="navbar-brand d-flex align-items-center">
+                    <strong>Create your own Recipe 2</strong>
+                  </a>
+                </div>
+              </div>
+            </header>
         
-        <script>
-  
-              function goBack() {
-  window.history.back();
-} 
-            
-            var rIndex,
-                table = document.getElementById("table");
-            
-            // check the empty input
-            function checkEmptyInput()
-            {
-                var isEmpty = false,
-                    s1 = document.getElementById("s1").value,
-                    s2 = document.getElementById("s2").value,
-                    s3 = document.getElementById("s3").value,
-                    i1 = document.getElementById("i1").value;
-            
-                if(s1 === ""){
-                    alert("Step 1 Cannot Be Empty");
-                    isEmpty = true;
-                }
-                else if(s2 === ""){
-                    alert("Step 2 Cannot Be Empty");
-                    isEmpty = true;
-                }
-                else if(s3 === ""){
-                    alert("Step 3 Cannot Be Empty");
-                    isEmpty = true;
-                }
-                else if(i1 === ""){
-                    alert("Ingredients Cannot Be Empty");
-                    isEmpty = true;
-                }
-                return isEmpty;
-            }
-            
-            // add Row
-            function addHtmlTableRow()
-            {
-                // get the table by id
-                // create a new row and cells
-                // get value from input text
-                // set the values into row cell's
-                if(!checkEmptyInput()){
-                var newRow = table.insertRow(table.length),
-                    cell1 = newRow.insertCell(0),
-                    cell2 = newRow.insertCell(1),
-                    cell3 = newRow.insertCell(2),
-                    cell4 = newRow.insertCell(3),
-                    s1 = document.getElementById("s1").value,
-                    s2 = document.getElementById("s2").value,
-                    s3 = document.getElementById("s3").value;
-                    i1 = document.getElementById("i1").value;
-            
-                cell1.innerHTML = s1;
-                cell2.innerHTML = s2;
-                cell3.innerHTML = s3;
-                cell4.innerHTML = i1;    
-                // call the function to set the event to the new row
-                selectedRowToInput();
+            <main role="main">
+        
+                <section class="container info-div">
+        
+                   <div class="row">
+                        
+                        <div class="col-md-12 info-display">
+                          <h3>Recipe list </h3>
+                          <table class="table table-bordered">
+                            
+                          </table>
+                        </div> 
+        
+                    </div>
                     
-            }
-            }
+                    <hr>
+        
+                    <div class="row">
+                        
+                          <div class="col-md-6">
+                            <h3>Recipe</h3>
+                        
+                            <form id="inputForm">
+                                      
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Enter Name" id="name">
+                                  </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Enter Steps" id="name1">
+                                  </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Enter Ingredients" id="name2">
+                                  </div>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-default" value="Submit" />
+        
+                                </div>
+        
+                            </form> 
+                            </div>
+        
+                        <div class="info-form col-md-6">
+                                <h3>Update Form</h3>
+        
+                            <form id="editForm">
+                                  
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Enter Name" name="name">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Enter Steps" name="name1">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Enter Ingredients" name="name2">
+                                </div>
+                                <input name="id" hidden>
+        
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-default">Update</button>
+                                </div>	
+                    
+                            </form>
+        
+                        </div>
+                    
+                    </div>
+        
+                </section>
+        
+        
+            </main>
+            <footer class="text-muted">
+              <div class="container">
+                <p class="float-right">
+              </div>
+            </footer>
+        
+            <!-- Bootstrap core JavaScript
+            ================================================== -->
+            <!-- Placed at the end of the document so the pages load faster -->
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+           
             
-            // display selected row data into input text
-            function selectedRowToInput()
-            {
+            <script type="text/javascript">
+                  
+              var storedUsers = [];	
+              var user_id = 0; 
+              var i = 0;
+            
+              function editUsers(i) {
+            var storedUsers = JSON.parse(localStorage.getItem('userData'));
+            $("#editForm").find('input[name="name"]').val(storedUsers[i]["name"]);
+            $("#editForm").find('input[name="name1"]').val(storedUsers[i]["name1"]);
+            $("#editForm").find('input[name="name2"]').val(storedUsers[i]["name2"]);
+            $("#editForm").find('input[name="id"]').val(i);
+              }	  
+            function deleteUsers(i) {
+                var storedUsers = JSON.parse(localStorage.getItem('userData'));
+                storedUsers.splice(i,1);
+                if(storedUsers.length==0) 
+                    $('table').remove();
+                window.localStorage.setItem('userData',JSON.stringify(storedUsers));
+                window.location.reload();
+            }
+                $(document).ready(function() {
+                if (localStorage.getItem("userData") !== null) {
+                    storedUsers = JSON.parse(localStorage.getItem("userData"));
                 
-                for(var i = 1; i < table.rows.length; i++)
-                {
-                    table.rows[i].onclick = function()
-                    {
-                      // get the seected row index
-                      rIndex = this.rowIndex;
-                      document.getElementById("s1").value = this.cells[0].innerHTML;
-                      document.getElementById("s2").value = this.cells[1].innerHTML;
-                      document.getElementById("s3").value = this.cells[2].innerHTML;
-                      document.getElementById("i1").value = this.cells[3].innerHTML;
-                    };
+                    if (localStorage.getItem("userData").length !== 2) {
+                        $('table').append('<tr><th>ID</th><th> Name </th><th> Name1 </th><th> Name2 </th><th> Edit </th><th> Delete </th></tr>');
+                    }
+        
+                    for(i=0; i<storedUsers.length; i++){
+                        var id = i+1;
+                        $('table').append('<tr><td>' + id + '</td><td>' + storedUsers[i]['name'] + '</td><td>' + storedUsers[i]['name1'] + '</td><td>' + storedUsers[i]['name2'] + '</td> <td> <button type=\"submit\" class=\"btn btn-default\" onclick=\"editUsers(' + i + ')\">Edit</button></td>' + '</td> <td> <button type=\"submit\" class=\"btn btn-default\" onclick=\"deleteUsers(' + i + ')\">Delete</button></td> </tr>');		
+                    }
                 }
-            }
-            selectedRowToInput();
-            
-            function editHtmlTbleSelectedRow()
-            {
-                var s1 = document.getElementById("s1").value,
-                    s2 = document.getElementById("s2").value,
-                    s3 = document.getElementById("s3").value;
-                    i1 = document.getElementById("i1").value;
-               if(!checkEmptyInput()){
-                table.rows[rIndex].cells[0].innerHTML = s1;
-                table.rows[rIndex].cells[1].innerHTML = s2;
-                table.rows[rIndex].cells[2].innerHTML = s3;
-                table.rows[rIndex].cells[3].innerHTML = i1;   
-              }
-            }
-            
-            function removeSelectedRow()
-            {
-                table.deleteRow(rIndex);
-                // clear input text
-                document.getElementById("s1").value = "";
-                document.getElementById("s2").value = "";
-                document.getElementById("s3").value = "";
-                document.getElementById("i1").value = "";
-            }
-   
-        </script>
+            });
+            $('#inputForm').on('submit', function (e) {
+                e.preventDefault();
+                
+                if (localStorage.getItem("userData") !== null) {
+                    storedUsers = JSON.parse(localStorage.getItem("userData"));
+                }
+        
+                if (localStorage.getItem("userData") === null){
+                    $('table').append('<tr><th> Name </th><th> name1 </th><th> name2 </th></tr>');
+                }
+                    
+                var n = $('#inputForm').find('input[type="text"]').val();
+        
+                var x = $('#inputForm').find('input[type="text"]').val();
+        
+                var c = $('#inputForm').find('input[type="text"]').val();
+        
+                const user = {
+                    name: n,
+                    name1: x,
+                    name2: c
+                }
+                    storedUsers.push(user);
+        
+                window.localStorage.setItem('userData',JSON.stringify(storedUsers));
+        
+                $(this).closest('form').find("input[type=text]").val("");
+                $(this).closest('form').find("input[type=text]").val("");
+                $(this).closest('form').find("input[type=text]").val("");
+                window.location.reload();
+        
+            });
+        $('#editForm').on('submit', function (e) {
+                e.preventDefault();
+                
+                storedUsers = JSON.parse(localStorage.getItem("userData"));
+                
+                var i = $('#editForm').find('input[name="id"]').val();
+        
+                var n = $('#editForm').find('input[name="name"]').val();
+        
+                var x = $('#editForm').find('input[name="name1"]').val();
+        
+                var c = $('#editForm').find('input[name="name2"]').val();
+        
+                storedUsers[i]["name"] = n;	
+                storedUsers[i]["name1"] = x;
+                storedUsers[i]["name2"] = c;
+                
+                window.localStorage.setItem('userData',JSON.stringify(storedUsers));
+        
+                window.location.reload();
+        
+            });
+        
+            </script>
+        
         <script src="/js/app.js"></script>
     </body>
 </html>
